@@ -31,7 +31,7 @@ export class HeaderPromotionComponent {
       const valor:any = resp[clave as keyof typeof resp];
 
       
-     this.valor=valor.category;
+     this.valor=JSON.parse(valor.top_banner);
       
     });
   }
