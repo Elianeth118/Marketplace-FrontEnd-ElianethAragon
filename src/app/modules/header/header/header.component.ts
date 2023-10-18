@@ -9,14 +9,31 @@ import { CategoriesService } from 'src/app/services/categories.service';
 export class HeaderComponent {
   path:String=Path.url;
   valorc:any;
-  constructor(private categoriesService:CategoriesService) {}
+  
+  arrayTitleList:Array<any>=[];
+  
+  constructor(private categoriesService:CategoriesService) {
+
+  }
   ngOnInit():void{
     this.categoriesService.getdata()
     .subscribe(resp=>{
       this.categoriesService.getdata()
       .subscribe((res)=>{
         this.valorc=resp;
+        let i;
+        let size=0;
+    for(i in resp){
+      const keys=Object.keys(resp);
+      const clave=keys[size];
+      const valor:any=resp[clave as keyof typeof resp]; 
+      this.arrayTitleList.push(JSON.parse(valor.title_list));
+      console.log(this.arrayTitleList);
+    }
+        
       })
+  
     })
+
   }
 }
